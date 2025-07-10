@@ -22,6 +22,10 @@ document.getElementById('visit-date').addEventListener('change', function () {
     const sevenDaysBefore = new Date(visitDate);
     sevenDaysBefore.setDate(sevenDaysBefore.getDate() - 7);
 
+    // 計算：この日付を基準にして、いつが最終申込日か？
+    const lastApply2Month = new Date(endTwoMonthsBefore);
+    const lastApply7Day = new Date(eightDaysBefore);
+
     const formatDate = (date) => {
         return date.getFullYear() + '-' +
                String(date.getMonth() + 1).padStart(2, '0') + '-' +
@@ -36,4 +40,10 @@ document.getElementById('visit-date').addEventListener('change', function () {
 
     document.getElementById('notification7').textContent =
         "▶ 7日前抽選 当選通知日：" + formatDate(sevenDaysBefore);
+
+    document.getElementById('max-2month').textContent =
+        "▶ その日基準で予約できる最大の来場日（2か月前抽選）：" + formatDate(new Date(lastApply2Month.setDate(lastApply2Month.getDate() + 1)));
+
+    document.getElementById('max-7day').textContent =
+        "▶ その日基準で予約できる最大の来場日（7日前抽選）：" + formatDate(new Date(lastApply7Day.setDate(lastApply7Day.getDate() + 1)));
 });
